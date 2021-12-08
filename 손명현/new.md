@@ -12,9 +12,8 @@
    - content : TextField, 포스트 내용
    - create_dt : DateTimeField, auto_now_add, 포스트 생성 날짜 (auto_now_add : 생성되는 순간 자동?)
    - modify_dt : DateTimeField, auto_now, 포스트 수정 날짜
--	로직 설계 : Ch 2의 URL-뷰-템플릿 간 처리 흐름대로. 원래는 꼭 필요한 과정이지만 지금은 이걸 쓰기에는 너무 쉬운 과정이라 넘어감
--	URL 설계
+- 로직 설계 : Ch 2의 URL-뷰-템플릿 간 처리 흐름대로. 원래는 꼭 필요한 과정이지만 지금은 이걸 쓰기에는 너무 쉬운 과정이라 넘어감
+- URL 설계
    - blog/post/ : ListView, DetailView를 상속
    - blog/archive/ : ArchiveView 관련 view를 상속
-   - 해보면서 알아보자
--	코딩순서 : 2장과 같음, 뼈대 --> 모델 --> URLconf --> View --> Template. 이 순서를 지킬 것
+- 코딩순서 : 2장과 같음, 뼈대 --> 모델 --> URLconf --> View --> Template. 이 순서를 지킬 것
