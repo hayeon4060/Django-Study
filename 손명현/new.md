@@ -42,6 +42,7 @@
 
 
 #### 그 외 새로 정의되는 메소드들
+- 새로 정의되는 메소드들
    - get_absolute_url() : 메소드가 정의된 객체를 지칭하는 URL을 반환함, 메소드 내에서 reverse()를 호출한다.
    - get_previous() : 메소드 내에서 장고의 내장 함수인 get_previous_by_modify_dt()를 호출. modify_dt 기준으로 최신 포스트를 반환?
    - get_next() : -modify_dt 컬럼을 기준으로 다음 포스트를 반환. 마찬가지로 장고 내장함수를 호출
@@ -51,4 +52,18 @@
    - modify_dt 컬럼을 사용하는 필터 사이드바 보여주도록
    - 검색박스 표시, 입력된 단어는 title과 content 컬럼에서 검색하도록
    - slug 필드는 title 필드를 사용해서 미리 채워지도록 한다.
--	makemigrations, migrate 진행하고 확인
+- makemigrations, migrate 진행하고 확인
+
+
+### 3. URLconf 코딩
+
+- ROOT_URLCONF, APP_URLCONF의 두 개 파일에 코딩할 것.
+- mysite/urls.py, blog/urls.py 두 개의 파일에 코딩하고, 북마크 앱도 그렇게 바꾸겠다.
+- include : include 안에 들어간 문자열의 urls.py로 그 처리를 위임한다.
+- bookmark 앱
+   - app_name = bookmark : namespace를 bookmark로 지정. URL패턴의 이름을 정할 때 URL 패턴이름이 충돌되지 않도록 한다. bookmark에도 index, detail이라는 이름의 URL패턴이 있고, blog에도 그런 이름의 URL패턴이 있다면 둘이 충돌할 것. 그래서 앱네임을 지정해서 구분해준다.
+   - path는 2장에서 만들었던 URL 패턴에서, mysite.urls로 옮겨진 ‘bookmark/’를 제외한 것. 나머지는 똑같음
+   - URL 패턴 이름이 달라졌기 때문에 템플릿 파일에서 URL 패턴 이름(ex. index, detail 등)을 사용했다면 수정해줘야 한다.
+   - <li><a href="{% url 'detail' bookmark.id %}">{{ bookmark }}</a></li> 이부분 --> url ‘detail’ 이부분을, url ‘bookmark:detail’ 로 바꿔주어야 함.
+- blog 앱
+   - re_path? regex를 사용해서 re_path라는 이름을 붙인 듯
