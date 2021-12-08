@@ -64,6 +64,6 @@
    - app_name = bookmark : namespace를 bookmark로 지정. URL패턴의 이름을 정할 때 URL 패턴이름이 충돌되지 않도록 한다. bookmark에도 index, detail이라는 이름의 URL패턴이 있고, blog에도 그런 이름의 URL패턴이 있다면 둘이 충돌할 것. 그래서 앱네임을 지정해서 구분해준다.
    - path는 2장에서 만들었던 URL 패턴에서, mysite.urls로 옮겨진 ‘bookmark/’를 제외한 것. 나머지는 똑같음
    - URL 패턴 이름이 달라졌기 때문에 템플릿 파일에서 URL 패턴 이름(ex. index, detail 등)을 사용했다면 수정해줘야 한다.
-   - <li><a href="{% url 'detail' bookmark.id %}">{{ bookmark }}</a></li> 이부분 --> url ‘detail’ 이부분을, url ‘bookmark:detail’ 로 바꿔주어야 함.
+   - \<li><a href="{% url 'detail' bookmark.id %}">{{ bookmark }}</a></li> 이부분 --> url ‘detail’ 이부분을, url ‘bookmark:detail’ 로 바꿔주어야 함.
 - blog 앱
    - re_path? regex를 사용해서 re_path라는 이름을 붙인 듯
