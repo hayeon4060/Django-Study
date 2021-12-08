@@ -87,5 +87,4 @@
 - MonthArchiveView : 날짜 필드의 연월을 기준으로 객체 리스트를 가져옴. 연 월 파라미터는 URLconf에서 추출해서 view로 넘겨줌. 기준 날짜 필드는 modify_dt 사용
 - DayArchiveView : 연 월 일. 나머지는 같음
 - TodayArchiveView : 날짜 필드가 오늘인 객체 리스트를 가져온다. 오늘 날짜를 기준 연월일로 지정한다는 점 외에는 DayArchiveView와 같다.
-
 - YearArchiveView, MonthArchiveView, DayArchiveView 각각이. 기준 연 월 일을 어떻게 구분할 수 있는지? URL 패턴에 기록된 year, month, day 말고는 전해주는 다른 방법이 없는데. URL 패턴에 기록된 2019라는 숫자가 year를 나타내는 것인지, 아닌지를 어떻게 YearArchiveView가 알고 그 year에 해당하는 객체들을 출력하는 건지?
