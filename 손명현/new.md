@@ -22,7 +22,7 @@
 ---
 
 ## 2. 코딩
-### 2. 모델 코딩
+### 2.2. 모델 코딩
 #### 포스트 테이블에 필요한 여러 코드들
 - 앞에서는 테이블 정의만 설계했는데, 여기서는 필요한 메소드도 함께 정의한다.
 - reverse() : urls.py에 정의한 URL name을 인수로 받아서 URL 패턴을 반환하는 함수.
@@ -59,7 +59,7 @@
 
 
 
-### 3. URLconf 코딩
+### 2.3. URLconf 코딩
 
 - ROOT_URLCONF, APP_URLCONF의 두 개 파일에 코딩할 것.
 - mysite/urls.py, blog/urls.py 두 개의 파일에 코딩하고, 북마크 앱도 그렇게 바꾸겠다.
@@ -75,4 +75,17 @@
 
 
 
-### 4. View 코딩
+### 2.4. View 코딩
+
+- ListView에서 객체의 정렬 순서는 modify_dt를 기준으로 내림차순(왜? model 작성할 때 ordering 어트리뷰트를 그렇게 짰으니까)
+- DetailView : re_path에서, slug를 View로 넘겨준다. View는 DetailView(PostDV)로 들어가며, 이 View에 할당된 template로 slug를 다시 넘겨준다. template는 아마도 post_detail.html일 듯.
+- ArchiveView : 객체 리스트를 가져와서, 지정한 날짜 필드를 기준으로 최신 객체를 먼저 출력한다.
+- 기준이 되는 날짜 필드는 modify_dt 컬럼을 사용한다.
+- YearArchiveView : 테이블로부터 날짜 필드의 연도를 기준으로 객체 리스트를 가져오고, 그 객체들이 속한 월을 리스트로 출력한다. 연도 파라미터는 URLconf에서 view로 넘겨준다.
+- 변경연도가 YYYY인 포스트를 검색해서, 그 포스트들의 변경 월을 출력 - 출력한다는 게 뭔 소리? 어디에 출력? 터미널에? (답 : template에 출력하는 코드가 있었음)
+- make_object_list 속성이 True면, 해당 연도에 해당하는 객체 리스트를 만들어서 템플릿에 넘겨준다.  object_list 컨텍스트 변수를 템플릿에서 사용 가능. 이게 False면 대체 무슨 객체를 template에 넘겨준다는 거지?
+- MonthArchiveView : 날짜 필드의 연월을 기준으로 객체 리스트를 가져옴. 연 월 파라미터는 URLconf에서 추출해서 view로 넘겨줌. 기준 날짜 필드는 modify_dt 사용
+- DayArchiveView : 연 월 일. 나머지는 같음
+- TodayArchiveView : 날짜 필드가 오늘인 객체 리스트를 가져온다. 오늘 날짜를 기준 연월일로 지정한다는 점 외에는 DayArchiveView와 같다.
+
+- YearArchiveView, MonthArchiveView, DayArchiveView 각각이. 기준 연 월 일을 어떻게 구분할 수 있는지? URL 패턴에 기록된 year, month, day 말고는 전해주는 다른 방법이 없는데. URL 패턴에 기록된 2019라는 숫자가 year를 나타내는 것인지, 아닌지를 어떻게 YearArchiveView가 알고 그 year에 해당하는 객체들을 출력하는 건지?
