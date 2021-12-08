@@ -2,7 +2,7 @@
 
 1. 애플리케이션 설계-	포스트 리스트를 보여주고, 특정 포스트를 클릭하면 해당 글을 읽을 수 있는 기능을 개발
 -	화면 UI 설계
- - post_list.html : Post들 title, modify_date, description. 그리고 페이지 이동과 관련된 template 파일
+  - post_list.html : Post들 title, modify_date, description. 그리고 페이지 이동과 관련된 template 파일
  - post_detail.html : Post간 이동, 그리고 post의 content를 보여주는 template 파일
 -	테이블 설계 : Post
  - id
