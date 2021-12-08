@@ -1,7 +1,7 @@
 # Ch 3. Blog App
 
 ## 1. 애플리케이션 설계 
-### 포스트 리스트를 보여주고, 특정 포스트를 클릭하면 해당 글을 읽을 수 있는 기능을 개발
+#### 포스트 리스트를 보여주고, 특정 포스트를 클릭하면 해당 글을 읽을 수 있는 기능을 개발
 - 화면 UI 설계
    - post_list.html : Post들 title, modify_date, description. 그리고 페이지 이동과 관련된 template 파일
    - post_detail.html : Post간 이동, 그리고 post의 content를 보여주는 template 파일
@@ -18,3 +18,37 @@
    - blog/post/ : ListView, DetailView를 상속
    - blog/archive/ : ArchiveView 관련 view를 상속
 - 코딩순서 : 2장과 같음, 뼈대 --> 모델 --> URLconf --> View --> Template. 이 순서를 지킬 것
+
+
+## 2. 코딩
+### 2. 모델 코딩
+#### 포스트 테이블에 필요한 여러 코드들
+- 앞에서는 테이블 정의만 설계했는데, 여기서는 필요한 메소드도 함께 정의한다.
+- reverse() : urls.py에 정의한 URL name을 인수로 받아서 URL 패턴을 반환하는 함수.
+- title : CharField, verbose_name은 컬럼에 대한 별칭을 나타냄.
+- slug : 제목의 별칭이다. 특정 포스트를 검색할 때 기본키 대신 사용됨…?
+   - 페이지나 포스트를 설명하는 핵심 단어 집합
+   - 페이지나 포스트 제목에서 조사, 전치사, 쉼표, 마침표 등 빼고, 띄어쓰기는 하이픈 대체
+   - 슬러그를 URL에 사용함으로써, 검색 엔진의 정확도를 높여주고 빨리 찾게 해줌.
+   - 수동으로 슬러그를 만드는 것보다, 이미 만들어놓은 데이터/함수를 이용해서 slug를 만들어라.
+- blank=True : 빈칸도 가능하다.
+- TextField : 여러 줄 입력이 가능
+- DateTimeField에서 auto_now_add=True : 객체가 생성될 때의 시각을 자동 기록
+- DateTimeField에서 auto_now : 객체가 데이터베이스에 저장될 때의 시각 자동 기록. 즉, 변경될 때.
+- 필드 속성 외 필요한 파라미터는 Meta 내부 클래스로 정의 한다.
+- 테이블의 별칭 : 단수, 복수로 가질 수 있는데 따로 설정 가능
+- db내에 저장되는 테이블 이름을 지정할 수 있음
+- 모델 객체의 리스트 출력 시에 modify_dt 컬럼을 기준으로 내림차순 정렬
+
+
+#### 그 외 새로 정의되는 메소드들
+   - get_absolute_url() : 메소드가 정의된 객체를 지칭하는 URL을 반환함, 메소드 내에서 reverse()를 호출한다.
+   - get_previous() : 메소드 내에서 장고의 내장 함수인 get_previous_by_modify_dt()를 호출. modify_dt 기준으로 최신 포스트를 반환?
+   - get_next() : -modify_dt 컬럼을 기준으로 다음 포스트를 반환. 마찬가지로 장고 내장함수를 호출
+   - get_previous_by_modify_dt()와 같은 내장함수들은 column이름을 어떻게 만드느냐에 따라서 다른 이름이 된다(modify_dt라는 column이 있기에 이러한 함수가 만들어짐)
+- 위에 정의한 Post 테이블이 admin 사이트에 보이도록, admin.py 수정
+   - Post 객체를 보여줄 때 id, title, modify_dt를 보이도록
+   - modify_dt 컬럼을 사용하는 필터 사이드바 보여주도록
+   - 검색박스 표시, 입력된 단어는 title과 content 컬럼에서 검색하도록
+   - slug 필드는 title 필드를 사용해서 미리 채워지도록 한다.
+-	makemigrations, migrate 진행하고 확인
