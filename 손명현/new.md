@@ -58,7 +58,7 @@
 - makemigrations, migrate 진행하고 확인
 
 
----
+
 ### 3. URLconf 코딩
 
 - ROOT_URLCONF, APP_URLCONF의 두 개 파일에 코딩할 것.
@@ -72,5 +72,7 @@
 - blog 앱
    - re_path? regex를 사용해서 re_path라는 이름을 붙인 듯
 
----
+
+
+
 ### 4. View 코딩
