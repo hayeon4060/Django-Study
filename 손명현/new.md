@@ -88,3 +88,17 @@
 - DayArchiveView : 연 월 일. 나머지는 같음
 - TodayArchiveView : 날짜 필드가 오늘인 객체 리스트를 가져온다. 오늘 날짜를 기준 연월일로 지정한다는 점 외에는 DayArchiveView와 같다.
 - YearArchiveView, MonthArchiveView, DayArchiveView 각각이. 기준 연 월 일을 어떻게 구분할 수 있는지? URL 패턴에 기록된 year, month, day 말고는 전해주는 다른 방법이 없는데. URL 패턴에 기록된 2019라는 숫자가 year를 나타내는 것인지, 아닌지를 어떻게 YearArchiveView가 알고 그 year에 해당하는 객체들을 출력하는 건지?
+
+
+### 2.5. Template 코딩
+#### post_all.html
+- post.get_absolute_url
+   - post 객체의 메소드를 호출. /blog/post/slug단어/ 와 같은 형식의 URL 패턴이 나올 것.
+   - models.py에서 코딩했음,
+   - 한 개의 post 객체가 주어지면, models.py에서 코딩한 ‘blog:post_detail’과 args(slug)를 합쳐서 URL 패턴을 리턴한다.
+   - 즉, post.get_absolute_url 은 그 post의 post_detail URL 패턴을 리턴함.
+- post.modify_dt|date:”N d, Y” : post의 modify_dt 속성값을 N d, Y 형태로 출력
+- page_obj : page 객체가 들어 있는 컨텍스트 변수. 하나의 페이지를 말하는 듯.
+- page_obj.has_previous : 이전 페이지가 있는지 없는지를 Boolean
+- page_obj.number는 현재 페이지 번호, page_obj.paginator.num_pages는 총 페이지 개수
+- url이 ?page=3 이런 식으로 짜이면 알아서 page=3으로 넘어가져?
