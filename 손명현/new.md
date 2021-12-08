@@ -19,6 +19,7 @@
    - blog/archive/ : ArchiveView 관련 view를 상속
 - 코딩순서 : 2장과 같음, 뼈대 --> 모델 --> URLconf --> View --> Template. 이 순서를 지킬 것
 
+---
 
 ## 2. 코딩
 ### 2. 모델 코딩
@@ -41,6 +42,8 @@
 - 모델 객체의 리스트 출력 시에 modify_dt 컬럼을 기준으로 내림차순 정렬
 
 
+
+
 #### 그 외 새로 정의되는 메소드들
 - 새로 정의되는 메소드들
    - get_absolute_url() : 메소드가 정의된 객체를 지칭하는 URL을 반환함, 메소드 내에서 reverse()를 호출한다.
@@ -55,6 +58,7 @@
 - makemigrations, migrate 진행하고 확인
 
 
+---
 ### 3. URLconf 코딩
 
 - ROOT_URLCONF, APP_URLCONF의 두 개 파일에 코딩할 것.
@@ -67,3 +71,6 @@
    - \<li>\<a href="{% url 'detail' bookmark.id %}">{{ bookmark }}\</a>\</li> 이부분 --> url ‘detail’ 이부분을, url ‘bookmark:detail’ 로 바꿔주어야 함.
 - blog 앱
    - re_path? regex를 사용해서 re_path라는 이름을 붙인 듯
+
+---
+### 4. View 코딩
